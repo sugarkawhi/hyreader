@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HyReaderView">
+        <attr name="hyReader_titleColor" format="color" />
+        <attr name="hyReader_titleSize" format="dimension" />
+        <attr name="hyReader_contentColor" format="color" />
+        <attr name="hyReader_contentSize" format="dimension" />
+        <attr name="hyReader_horizontalPadding" format="dimension" />
+        <attr name="hyReader_headerHeight" format="dimension" />
+        <attr name="hyReader_footerHeight" format="dimension" />
+        <attr name="hyReader_batteryWidth" format="dimension" />
+        <attr name="hyReader_batteryHeight" format="dimension" />
+        <attr name="hyReader_batteryHeadSize" format="dimension" />
+        <attr name="hyReader_batteryGap" format="dimension" />
+    </declare-styleable>
+</resources>

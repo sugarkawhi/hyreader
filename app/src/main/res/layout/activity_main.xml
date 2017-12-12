@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="me.sugarkawhi.readerdemo.MainActivity">
+
+    <me.sugarkawhi.hyreader.view.SimpleReaderView
+        android:id="@+id/readerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        app:hyReader_batteryGap="1dp"
+        app:hyReader_batteryHeadSize="2dp"
+        app:hyReader_batteryHeight="10dp"
+        app:hyReader_batteryWidth="20dp"
+        app:hyReader_contentColor="@color/colorPrimary"
+        app:hyReader_contentSize="20sp"
+        app:hyReader_footerHeight="30dp"
+        app:hyReader_headerHeight="20dp"
+        app:hyReader_horizontalPadding="10dp"
+        app:hyReader_titleColor="@color/black"
+        app:hyReader_titleSize="12sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="电量" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+</LinearLayout>
