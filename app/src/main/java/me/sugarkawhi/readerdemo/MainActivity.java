@@ -11,6 +11,15 @@ import android.widget.SeekBar;
 import me.sugarkawhi.hyreader.view.SimpleReaderView;
 
 public class MainActivity extends AppCompatActivity {
+    private String content = "直到有人在办公室放《大悲咒》，我终于忍不住了。我需要他们给我解释清楚。\n" +
+            "我找来一堆90后，请他们详细讲了讲自己的佛系生活方式。比如——\n" +
+            "佛系乘客：给司机打电话说，你不要动，我来找你\n" +
+            "佛系健身：下班后去健身房走一走，就很开心\n" +
+            "佛系好友：在朋友圈随缘点赞，都是爱的鼓励\n" +
+            "把佛祖无欲无求的概念偷换到自己身上，其实就是丧文化的一种表现。\n" +
+            "我不把这理解为真正的自我放弃，而是压力和焦虑下，年轻人的自我消解。\n" +
+            "况且，好像真的很管用。\n" +
+            "我每听完一个故事，都想念一句阿弥陀佛";
     SimpleReaderView simpleReaderView;
 
     @Override
@@ -36,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        simpleReaderView.setCurrentContent(content);
     }
 
 

@@ -10,6 +10,9 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -60,10 +63,10 @@ public abstract class HyReaderView extends View {
     //标题 时间 电池 进度 Paint
     private Paint mTitlePaint;
     //内容Paint
-    private Paint mContentPaint;
+    private TextPaint mContentPaint;
     //测量时间字符串宽度
     private Rect mTimeRect;
-
+    //Content 文字样式
     private Typeface mTypeface;
     //当前页面画布
     private Canvas mCurrentCanvas;
@@ -87,6 +90,12 @@ public abstract class HyReaderView extends View {
     private float mCurrentProgress;
     //下一页进度
     private float mNextProgress;
+    //当前页内容
+    private String mCurrentContent;
+    //下一页内容
+    private String mNextContent;
+    //绘制多行文字
+    private StaticLayout mStaticLayout;
 
     public HyReaderView(Context context) {
         this(context, null);
@@ -116,7 +125,7 @@ public abstract class HyReaderView extends View {
 
     private void init() {
         //内容
-        mContentPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mContentPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         mContentPaint.setColor(mContentColor);
         mContentPaint.setTextSize(mContentSize);
         mContentPaint.setTypeface(Typeface.DEFAULT);
@@ -196,6 +205,8 @@ public abstract class HyReaderView extends View {
         drawHeader(canvas, mCurrentChapterName);
         //画底部 电池、进度、时间
         drawFooter(canvas, mCurrentProgress);
+        //画文字内容
+        drawContent(canvas, mCurrentContent);
     }
 
     /**
@@ -256,13 +267,29 @@ public abstract class HyReaderView extends View {
         }
     }
 
+    /**
+     * 画当前内容
+     */
+    private void drawContent(Canvas canvas, String content) {
+        if (TextUtils.isEmpty(content)) return;
+        canvas.save();
+        mStaticLayout = new StaticLayout(content, mContentPaint, mWidth - mHorizontalPadding * 2, Layout.Alignment.ALIGN_NORMAL, 1, 0, true);
+        mStaticLayout.draw(canvas);
+        canvas.restore();
+    }
 
+    /**
+     * 设置背景Bitmap
+     */
     public void setBackgroundBitmap(Bitmap backgroundBitmap) {
         this.mBackgroundBitmap = backgroundBitmap;
         postInvalidate();
     }
 
-
+    /**
+     * 设置电量
+     * TODO STATE_SCROLL时不设置
+     */
     public void setBatteryElectricity(float batteryElectricity) {
         mBatteryElectricity = batteryElectricity;
         postInvalidate();
@@ -289,6 +316,22 @@ public abstract class HyReaderView extends View {
     public void setTime(String time) {
         if (TextUtils.isEmpty(time)) return;
         mTime = time;
+        postInvalidate();
+    }
+
+    /**
+     * 设置当前页内容
+     */
+    public void setCurrentContent(String currentContent) {
+        this.mCurrentContent = currentContent;
+        postInvalidate();
+    }
+
+    /**
+     * 设置下一页页内容
+     */
+    public void setNextContent(String nextContent) {
+        this.mNextContent = nextContent;
         postInvalidate();
     }
 
